@@ -1,0 +1,19 @@
+let num1;
+let num2;
+let opr;
+
+num1 = Number(prompt("enter num1: "));
+num2 = Number(prompt("enter num2: "));
+opr = prompt("choose any one: + - / *");
+
+if (opr === "+") {
+  console.log(num1 + num2);
+} else if (opr === "-") {
+  console.log(num1 - num2);
+} else if (opr === "/") {
+  console.log(num1 / num2);
+} else if (opr === "*") {
+  console.log(num1 * num2);
+} else {
+  console.log("Invalid operator");
+}
