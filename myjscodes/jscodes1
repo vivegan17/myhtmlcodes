@@ -4,7 +4,7 @@ let opr;
 
 num1 = Number(prompt("enter num1: "));
 num2 = Number(prompt("enter num2: "));
-opr = prompt("choose any one: + - / *");
+opr = (prompt("choose any one: + - / *") || "").trim();
 
 if (opr === "+") {
   console.log(num1 + num2);
