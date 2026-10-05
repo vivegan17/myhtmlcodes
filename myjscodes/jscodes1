@@ -1,15 +1,24 @@
-let num1;
-let num2;
-let opr;
+const input1 = prompt("enter num1: ");
+const input2 = prompt("enter num2: ");
+const num1 = Number(input1);
+const num2 = Number(input2);
+const opr = prompt("choose any one: + - / *");
 
-num1 = Number(prompt("enter num1: "));
-num2 = Number(prompt("enter num2: "));
-opr = prompt("choose any one: + - / *");
-
-if (opr === "+") {
+if (
+  input1 === null ||
+  input2 === null ||
+  input1.trim() === "" ||
+  input2.trim() === "" ||
+  !Number.isFinite(num1) ||
+  !Number.isFinite(num2)
+) {
+  console.log("Please enter valid numbers.");
+} else if (opr === "+") {
   console.log(num1 + num2);
 } else if (opr === "-") {
   console.log(num1 - num2);
+} else if (opr === "/" && num2 === 0) {
+  console.log("Cannot divide by zero.");
 } else if (opr === "/") {
   console.log(num1 / num2);
 } else if (opr === "*") {
