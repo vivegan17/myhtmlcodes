@@ -24,11 +24,21 @@
             <input id="gender" type = "checkbox" value = "female">
             <label for = "gender">Female</label>
           </div>
-
+          <button type ="submit">Submit</button>
         </form>
-     
+     <p id="result"></p>
     </body>
     <script>
-
+    document.getElementById("eligibility").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const name = document.getElementById("username").value;
+        const age = Number(document.getElementById("userage").value);
+        const result = document.getElementById("result");
+        if (age >= 18) {
+            result.textContent = `Hello ${name}! You are eligible`;
+        } else {
+            result.textContent = `Hello ${name}! You are not eligible`;
+        }
+    });
     </script>
 </html>
