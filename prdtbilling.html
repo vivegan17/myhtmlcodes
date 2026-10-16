@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Billing</title>
+</head>
+<body>
+  <h1>PRODUCT BILLING</h1>
+
+  <label for="product">Enter Product Name:</label><br>
+  <input id="product" type="text" placeholder="Enter your product name" required><br><br>
+
+  <label for="price">Enter Product Price:</label><br>
+  <input id="price" type="number" min="0" step="0.01" placeholder="Enter your product price" required><br><br>
+
+  <label for="quantity">Enter Product Quantity:</label><br>
+  <input id="quantity" type="number" min="1" step="1" placeholder="Enter your product quantity" required><br><br>
+
+  <span>Discount:</span><br>
+  <input id="discount-5" type="radio" name="discount" value="5">
+  <label for="discount-5">5%</label>
+  <input id="discount-0" type="radio" name="discount" value="0" checked>
+  <label for="discount-0">0%</label><br>
+  <
+  <label for="final-price">Final Price:</label><br>
+  <input id="final-price" type="number" placeholder="Final price" readonly><br>
+  <button type="button" onclick="calculateFinalPrice()">Calculate Final Price</button>
+  <script>
+
+
+function calculateFinalPrice() {
+  let total = document.getElementById("price").value *
+              document.getElementById("quantity").value;
+  let percent = document.querySelector('input[name="discount"]:checked').value;
+  document.getElementById("final-price").value = total - total * percent / 100;
+}
+</script>
+ 
+</body>
+</html>

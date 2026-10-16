@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100px;
+        }
+
+        .element1 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="display" type="text" readonly>
+        <div class="element1">
+            <button class="b1" onclick="document.getElementById('display').value += '1'">1</button>
+            <button class="b2" onclick="document.getElementById('display').value += '2'">2</button>
+            <button class="b3" onclick="document.getElementById('display').value += '3'">3</button>
+            <button class="b4" onclick="document.getElementById('display').value += '4'">4</button>
+        </div>
+    </div>
+</body>
+</html>
