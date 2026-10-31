@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 1px 16px 32px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            background-color: #333;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .gender label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin: 8px 10px 15px 0;
+            font-weight: normal;
+        }
+
+        .gender input {
+            width: auto;
+            margin: 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .submit {
+            background-color: green;
+        }
+
+        .clear {
+            background-color: red;
+        }
+
+        #message {
+            margin-top: 20px;
+        }
+
+        #message h2 {
+            text-align: center;
+            color: green;
+        }
+
+        #message p {
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+    <h1>STUDENT REGISTRATION FORM</h1>
+
+    <main class="container">
+        <form id="myForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+
+            <label for="department">Department:</label>
+            <select id="department" required>
+                <option value="">Select Department</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="Civil">Civil</option>
+                <option value="Mech">Mech</option>
+            </select>
+
+            <span class="field-label">Gender:</span>
+            <div class="gender">
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <button type="submit" class="submit">Submit</button>
+            <button type="reset" class="clear">Clear</button>
+        </form>
+
+        <section id="message" aria-live="polite"></section>
+    </main>
+
+    <script>
+        const form = document.getElementById("myForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const dob = document.getElementById("dob").value;
+            const department = document.getElementById("department").value;
+            const gender = form.querySelector('input[name="gender"]:checked').value;
+            const email = document.getElementById("email").value.trim();
+
+            const details = [
+                ["Name", name],
+                ["Date of Birth", dob],
+                ["Department", department],
+                ["Gender", gender],
+                ["Email", email]
+            ];
+
+            message.replaceChildren();
+            const heading = document.createElement("h2");
+            heading.textContent = "Registration submitted!";
+            message.appendChild(heading);
+
+            for (const [label, value] of details) {
+                const row = document.createElement("p");
+                const field = document.createElement("strong");
+                field.textContent = label + ": ";
+                row.append(field, document.createTextNode(value));
+                message.appendChild(row);
+            }
+        });
+
+        form.addEventListener("reset", function () {
+            message.replaceChildren();
+        });
+    </script>
+</body>
+</html>

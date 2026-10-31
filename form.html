@@ -1,15 +1,237 @@
 <!DOCTYPE html>
 <html>
-    <title>
-        form
-    </title>
-    <h1>
-        student details
-    </h1>
-    <form>
-        name = <input type ="text"><br>
-        email = <input type ="email">
-        <button>SUBMIT</button>
-    </form>
+<head>
+    <title>Student Registration Form</title>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            background-color: #333;
+            padding: 15px;
+        }
+
+        .container {
+            width: 400px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .gender input {
+            width: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .submit {
+            background-color: green;
+        }
+
+        .clear {
+            background-color: red;
+        }
+
+        #message {
+            text-align: center;
+            font-weight: bold;
+            color: green;
+        }
+
+        .records {
+            width: 90%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>STUDENT REGISTRATION FORM</h1>
+
+    <div class="container">
+
+        <form id="myForm">
+
+            <label>Name:</label>
+            <input type="text" id="name"
+                   placeholder="Enter your name" required>
+
+            <label>Date of Birth:</label>
+            <input type="date" id="dob" required>
+
+            <label>Department:</label>
+            <select id="department" required>
+                <option value="">Select Department</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="Civil">Civil</option>
+                <option value="Mech">Mech</option>
+            </select>
+
+            <label>Gender:</label>
+
+            <div class="gender">
+                <input type="radio" name="gender"
+                       value="Male" required> Male
+
+                <input type="radio" name="gender"
+                       value="Female"> Female
+
+                <input type="radio" name="gender"
+                       value="Other"> Other
+            </div>
+
+            <br>
+
+            <label>Email:</label>
+            <input type="email" id="email"
+                   placeholder="Enter your email" required>
+
+            <button type="submit" class="submit">
+                Submit
+            </button>
+
+            <button type="reset" class="clear">
+                Clear
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </div>
+
+  
+    </div>
+
+    <script>
+
+        
+// Google Apps Script Web App URL
+const scriptURL = "https://script.google.com/macros/s/AKfycbwTul6fSQf9gpiDrDTmQP9OLTM7BQQvdpWwj-baUyf1nrPhc2Lr82QYDdOmZV37785mSQ/exec";
+
+// Get the form
+let form = document.getElementById("myForm");
+
+// Get the message area
+let message = document.getElementById("message");
+
+// Form submission
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+
+    let dob = document.getElementById("dob").value;
+
+    let department = document.getElementById("department").value;
+
+    let gender = document.querySelector(
+        'input[name="gender"]:checked'
+    );
+
+    let email = document.getElementById("email").value.trim();
+
+    // Validate name
+    if (name === "") {
+        alert("Please enter your name");
+        return;
+    }
+
+    // Validate gender
+    if (!gender) {
+        alert("Please select your gender");
+        return;
+    }
+
+    // Collect student details
+    let student = {
+        name: name,
+        dob: dob,
+        department: department,
+        gender: gender.value,
+        email: email
+    };
+
+    // Send details to Google Sheets
+    message.textContent = "Submitting...";
+
+    fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams(student)
+    })
+    .then(function() {
+
+        message.textContent =
+            "Registration submitted! Please check Google Sheets.";
+
+        form.reset();
+
+    })
+    .catch(function(error) {
+
+        message.textContent =
+            "Error submitting registration. Please try again.";
+
+        console.log(error);
+
+    });
+
+});
+
+
+    </script>
+
+</body>
 </html>
